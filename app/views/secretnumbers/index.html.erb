@@ -1,0 +1,25 @@
+<h1>Listing secretnumbers</h1>
+
+<table>
+  <tr>
+    <th>Value</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @secretnumbers.each do |secretnumber| %>
+  <tr>
+    <td><%= secretnumber.value %></td>
+    <td><%= secretnumber.user_id %></td>
+    <td><%= link_to 'Show', secretnumber %></td>
+    <td><%= link_to 'Edit', edit_secretnumber_path(secretnumber) %></td>
+    <td><%= link_to 'Destroy', secretnumber, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Secretnumber', new_secretnumber_path %>
