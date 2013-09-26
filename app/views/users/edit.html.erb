@@ -1,6 +1,30 @@
-<h1>Editing user</h1>
+<% provide(:title, "Изменение профиля") %>
+<h1>Изменение профиля</h1>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="span6 offset3">
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+    <%= gravatar_for @user %>
+    <a href="http://gravatar.com/emails">Изменить</a>
+    <hr>
+
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :name, "Имя"%>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password, "Пароль" %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Подтверждение пароля" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Сохранить изменения", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

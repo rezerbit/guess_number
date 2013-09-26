@@ -1,14 +1,21 @@
-GuessNumber::Application.routes.draw do
-  get "static_pages/home"
-  
+GuessNumber::Application.routes.draw do  
   root :to => 'static_pages#home'
 
-  resources :secretnumbers
+  match '/game', to: 'secretnumbers#index'
+  match '/logic', to: 'secretnumbers#logic'
 
+  resources :users do
+    resources :secretnumbers
+  end
 
-  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
+  match '/signup',  to: 'users#new'
+  match '/show_all_users', to: 'users#show_all_users'
 
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+                              
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

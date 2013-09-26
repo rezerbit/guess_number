@@ -1,25 +1,15 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @user.name) %>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<div class="row">
+  <div class="span6 offset3">
+    <h2> <%= gravatar_for @user, size: 170 %> </h2>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+    <p><b>Имя:  </b> <%= @user.name %> </p>
 
-<p>
-  <b>Guessed:</b>
-  <%= @user.guessed %>
-</p>
+    <p><b>Email:  </b> <%= @user.email %> </p>
 
-<p>
-  <b>Win:</b>
-  <%= @user.win %>
-</p>
+    <p><b>Попыток угадать числа:  </b> <%= @user.secretnumber.try %> </p>
 
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    <p><b>Угадано чисел:  </b>  <%= @user.secretnumber.win %> </p>
+  </div>
+</div>

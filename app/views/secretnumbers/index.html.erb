@@ -1,25 +1,23 @@
-<h1>Listing secretnumbers</h1>
+<% provide(:title, @user.name) %>
 
-<table>
-  <tr>
-    <th>Value</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="row">
+  <div class="span6 offset3">
 
-<% @secretnumbers.each do |secretnumber| %>
-  <tr>
-    <td><%= secretnumber.value %></td>
-    <td><%= secretnumber.user_id %></td>
-    <td><%= link_to 'Show', secretnumber %></td>
-    <td><%= link_to 'Edit', edit_secretnumber_path(secretnumber) %></td>
-    <td><%= link_to 'Destroy', secretnumber, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+		<%= gravatar_for @user, size: 80 %>
 
-<br />
+		<b> | Имя:  </b> <%= @user.name %> <br>
+		<b> | Email:  </b> <%= @user.email %> <br>
+		<b> | Попыток угадать числа:  </b> <%= @user.secretnumber.try %> <br>
+		<b> | Угадано чисел:  </b> <%= @user.secretnumber.win %> <hr>
 
-<%= link_to 'New Secretnumber', new_secretnumber_path %>
+		<%= form_tag("/logic", method: "get") do %>
+      <%= render 'shared/error_messages' %>
+		  
+      <%= label_tag(:user_number, "Я думаю, что это число:") %>
+		  <%= text_field_tag(:user_number) %>
+		  
+      <%= submit_tag("Проверить", class: "btn btn-large btn-primary") %>
+		<% end %>
+		
+  </div>
+</div>

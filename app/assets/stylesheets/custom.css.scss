@@ -4,6 +4,7 @@
 
 $lightGray: #999;
 $grayMediumLight: #eaeaea;
+$orange: #ff7400;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -68,12 +69,12 @@ p {
 
 #logo {
   float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: #fff;
+  margin-right: 14px;
+  font-size: 1.2em;
+  color: $orange;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 12px;
   font-weight: bold;
   line-height: 1;
   &:hover {

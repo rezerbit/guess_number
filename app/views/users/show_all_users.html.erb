@@ -1,0 +1,17 @@
+<% provide(:title, 'Рейтинг') %>
+<h1>Рейтинг</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <ul class="users">
+      <% @all_users.each do |user| %>
+          <%= link_to (gravatar_for user, size: 80), user %><br>
+
+          <% user_info = "#{user.name} | Попыток: #{user.secretnumber.try}  
+                          | Угадано: #{user.secretnumber.win} "%>
+
+          <%= link_to user_info, user %> <hr>
+      <% end %>
+    </ul>		
+  </div>
+</div>
