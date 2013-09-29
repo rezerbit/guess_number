@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925173905) do
+ActiveRecord::Schema.define(:version => 20130929081900) do
 
   create_table "secretnumbers", :force => true do |t|
     t.integer  "value"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20130925173905) do
     t.integer  "try"
     t.integer  "win"
   end
+
+  add_index "secretnumbers", ["user_id"], :name => "index_secretnumbers_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SessionsController < ApplicationController
 
   def new
@@ -10,7 +12,7 @@ class SessionsController < ApplicationController
 
       redirect_to game_path
     else
-      flash.now[:error] = 'Invalid email/password combination!'
+      flash.now[:error] = 'Неверный email или пароль!'
       render 'new'
     end
   end

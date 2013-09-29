@@ -12,13 +12,42 @@
 #
 
 class Secretnumber < ActiveRecord::Base
-  attr_accessible :value, :user_id, :try, :win
+  attr_accessible :value, :try, :win
   belongs_to :user
 
-  validates :user_id, presence: true
-  validates :value, presence: true, 
-                    numericality: { only_integer: true, less_than: 101 }
+  validates :user_id,
+    presence: true,
+    numericality: {
+      only_integer: true,
+      allow_nil: false,
+      greater_than_or_equal_to: 1,
+      less_than_or_equal_to: 1000000,
+      message: "can only be whole number between 1 and 1000000." }
 
-  validates :try, presence: true, numericality: { only_integer: true, less_than: 10000 }
-  validates :win, presence: true,  numericality: { only_integer: true, less_than: 1000 }
+  validates :value,
+    presence: true,
+    numericality: {
+      only_integer: true,
+      allow_nil: false,
+      greater_than_or_equal_to: 0,
+      less_than_or_equal_to: 100,
+      message: "can only be whole number between 0 and 100." }
+
+  validates :try,
+    presence: true,
+    numericality: {
+      only_integer: true,
+      allow_nil: false,
+      greater_than_or_equal_to: 0,
+      less_than_or_equal_to: 1000000,
+      message: "can only be whole number between 1 and 1000000." }
+
+  validates :win,
+    presence: true,
+    numericality: {
+      only_integer: true,
+      allow_nil: false,
+      greater_than_or_equal_to: 0,
+      less_than_or_equal_to: 1000000,
+      message: "can only be whole number between 1 and 1000000." }
 end

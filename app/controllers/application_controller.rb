@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -5,7 +7,8 @@ class ApplicationController < ActionController::Base
   include UsersHelper
   include SecretnumbersHelper
 
-  before_filter :signed_in_user, only: [:edit, :update, :show_all_users, :index, :logic]
+
+  before_filter :signed_in_user, only: [:edit, :update, :rating, :game, :logic]
   before_filter :correct_user,   only: [:edit, :update]
 
   # Force signout to prevent CSRF attacks
@@ -18,7 +21,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def signed_in_user
-      redirect_to signin_url, notice: "Pojaluysta, avtorizuytes!" unless signed_in?
+      redirect_to signin_url, notice: "Пожалуйста, авторизуйтесь!" unless signed_in?
     end
 
     def correct_user

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class UsersController < ApplicationController
 
   def new
@@ -9,6 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
   end
 
   def create
@@ -18,29 +21,26 @@ class UsersController < ApplicationController
 
       sign_in @user
 
-      flash[:success] = "Dobro pojalovat, #{@user.name}!"
+      flash[:success] = "Добро пожаловать, #{@user.name}!"
       redirect_to game_path
     else
       render 'new'
     end
   end
 
-  def show_all_users
+  def rating
     @all_users = User.all
-    #todo: sort by win 
+
+    #todo: sort by win
   end
 
   def update
     if @user.update_attributes(params[:user])
-      flash[:success] = "Profil izmenen"
+      flash[:success] = "Профиль изменен!"
       sign_in @user
       redirect_to @user
     else
       render 'edit'
     end
-  end
-  
-  def destroy
-    
   end
 end

@@ -1,39 +1,50 @@
+# encoding: utf-8
+
 module SecretnumbersHelper
+	class Logic
 
-	def game_logic_for(user)
+		  def initialize(user, user_number)
+		     @user = user
+		     @user_number = user_number
 
-		user_number = params[:user_number]
+		  end
 
-	  if user_number.match /[0-9]{1,3}/		# user number validation, only number
-	  	# Increment the try
-      user.secretnumber.try = user.secretnumber.try.next
-      secret_number = user.secretnumber.value
-      user.secretnumber.save
+    def get_message
 
-      user_number = user_number.to_i
-      
-		  unless  secret_number == user_number
-		    if secret_number < user_number
-		      flash[:notice] = "#{@user.name}, zagadannoe chislo menshe #{params[:user_number]}"
-		    else
-		      flash[:notice] = "#{@user.name}, zagadannoe chislo bolshe #{params[:user_number]}"
-		    end
-	    else
-	    	# Increment the win
-	      user.secretnumber.win = user.secretnumber.win.next
+      if @user_number.match /[0-9]{1,3}/   # user number validation, only number
+        # Increment the try
+        @user.secretnumber.try = @user.secretnumber.try.next
+        secret_number = @user.secretnumber.value
+        @user.secretnumber.save
 
-	      generate_secret_value_for @user
-	      
-	      flash[:success] = "#{user.name}, vi otgadali chislo #{params[:user_number]}! 
-	                              Zagadano novoe chislo."
-	    end
-		else			
-	    flash[:error] = "#{@user.name}, vvedite chislo!"
-		end
-	end
+        @user_number = @user_number.to_i
 
-	def generate_secret_value_for user
-		user.secretnumber.value = rand(0..100)
-		user.secretnumber.save
-	end 
+        unless  secret_number == @user_number
+          if secret_number < @user_number
+            return "#{@ser.name}, загаданное число меньше #{@user_number}"
+          else
+            return "#{@user.name}, загаданное число больше #{@user_number}"
+          end
+        else
+          # Increment the win
+          @user.secretnumber.win = @user.secretnumber.win.next
+
+          generate_secret_value_for @user
+
+          return "#{user.name}, Вы отгадали число #{user_number}!
+                                  Загадано новое число."
+        end
+      else
+        return "#{@user.name}, введите число!"
+      end
+    end
+
+
+    protected
+
+    def generate_secret_value
+      @user.secretnumber.value = rand(0..100)
+      @user.secretnumber.save
+    end
+  end
 end
