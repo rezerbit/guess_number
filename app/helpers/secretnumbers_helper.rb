@@ -11,29 +11,29 @@ module SecretnumbersHelper
 
     def get_message
 
-      if @user_number.match /[0-9]{1,3}/   # user number validation, only number
-        # Increment the try
-        @user.secretnumber.try = @user.secretnumber.try.next
-        secret_number = @user.secretnumber.value
-        @user.secretnumber.save
+      if user_number_valid?
+        increment @user.secretnumber.try
 
+        @secret_number = @user.secretnumber.value
         @user_number = @user_number.to_i
 
-        unless  secret_number == @user_number
-          if secret_number < @user_number
-            return "#{@ser.name}, загаданное число меньше #{@user_number}"
+        unless  @secret_number == @user_number
+
+          if @secret_number < @user_number
+            return "#{@user.name}, загаданное число меньше #{@user_number}"
           else
             return "#{@user.name}, загаданное число больше #{@user_number}"
           end
+
         else
-          # Increment the win
-          @user.secretnumber.win = @user.secretnumber.win.next
+          increment @user.secretnumber.win
 
-          generate_secret_value_for @user
+          generate_secret_value
 
-          return "#{user.name}, Вы отгадали число #{user_number}!
+          return "#{@user.name}, Вы отгадали число #{@user_number}!
                                   Загадано новое число."
         end
+
       else
         return "#{@user.name}, введите число!"
       end
@@ -42,8 +42,22 @@ module SecretnumbersHelper
 
     protected
 
+    def user_number_valid?
+      # user number validation, only number
+      return @user_number.match /[0-9]{1,3}/
+    end
+
+    def increment(x)
+      x = x.next
+      save
+    end
+
     def generate_secret_value
       @user.secretnumber.value = rand(0..100)
+      save
+    end
+
+    def save
       @user.secretnumber.save
     end
   end

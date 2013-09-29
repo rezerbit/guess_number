@@ -10,6 +10,7 @@
 		<b> | Попыток угадать числа: </b> <%= @user.secretnumber.try %> <br>
 		<b> | Угадано чисел: </b> <%= @user.secretnumber.win %> <hr>
 		<h2>Загаданное число находится в диапазоне <br> от 0 до 100</h2>
+    <h2>  </h2>
 
     <%= form_tag("/logic", method: "get") do %>
       <%= render 'shared/error_messages' %>

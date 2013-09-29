@@ -2,7 +2,6 @@ class SecretnumbersController < ApplicationController
 
   def game
     @user = current_user
-    #@secret_number = @user.secretnumber
   end
 
   def logic

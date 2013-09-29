@@ -28,8 +28,8 @@ describe Secretnumber do
   it { should respond_to(:try) }
   it { should respond_to(:win) }
 
-  #it { should respond_to(:user) }
-  #its(:user) { should == user }
+  it { should respond_to(:user) }
+  its(:user) { should == user }
 
   it { should be_valid }
 
